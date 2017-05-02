@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id="container1">
+      <child message="hello!"></child>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    // 全局注册
+    Vue.component('child', {
+      // 声明props 
+      props: ['message'],
+      template: '<span>{{ message }}</span>'
+    });
+    new Vue({
+      el: '#container1'
+    })
+  </script>
+</html>

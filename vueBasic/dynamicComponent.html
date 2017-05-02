@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+
+    <h3>动态组件</h3>
+    <template id="tab-01">
+      <div>this is tab01</div>
+    </template>
+    <template id='tab-02'>
+      <div>this is tab02</div>
+    </template>
+    <template id="tab-03">
+      <div>this is tab03</div>
+    </template>
+
+    <div id="container1">
+      <!-- 导航栏 -->
+      <ul>
+        <li>
+          <a href="javascript:void(0)" @click="toggleTabs(tab01Text);">{{ tab01Text }}</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" @click="toggleTabs(tab02Text);">{{ tab02Text }}</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" @click="toggleTabs(tab03Text);">{{ tab03Text }}</a>
+        </li>
+      </ul>
+      <!-- 点击导航后要切换的内容 -->
+      <div class='content' style='height: 200px'>
+        <!-- 如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染。为此可以添加一个 keep-alive 指令参数 -->
+        <keep-alive>
+           <component :is="currentView"></component>
+        </keep-alive>
+      </div>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+     var tab01 = Vue.extend({
+       template: '#tab-01'
+     });
+     var tab02 = Vue.extend({
+       template: '#tab-02'
+     });
+     var tab03 = Vue.extend({
+        template: '#tab-03'
+     });
+     // 新建vue实例
+     var newVue = new Vue({
+       el: '#container1',
+       data: {
+         tab01Text: "tab01",  // 菜单一
+         tab02Text: "tab02",  // 菜单二
+         tab03Text: "tab03",  // 菜单三
+         currentView: "tab01" // 默认选中的导航栏
+       },
+       // 局部注册组件
+       components: {
+         tab01: tab01,
+         tab02: tab02,
+         tab03: tab03,
+       },
+       methods: {
+         // 绑定tab的切换事件
+         toggleTabs: function(tabText) {
+           this.currentView = tabText;
+         }
+       }
+     })
+  </script>
+</html>

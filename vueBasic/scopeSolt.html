@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id="container1">
+      <parent-component></parent-component>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    // 子组件
+    Vue.component('child-component', {
+      template: '<ul><slot name="child-ul" v-for="item in rets" v-bind:text="item.name"></slot></ul>',
+      data: function() {
+        return {
+          rets: [
+            {name: '我是苹果'},
+            {name: '我是香蕉'},
+            {name: '我是橘子'}
+          ]
+        }
+      }
+    });
+    // 父组件
+    Vue.component('parent-component', {
+      template: '<child-component><template scope="props" slot="child-ul"><li>{{props.text}}</li></template></child-component>'
+    })
+    new Vue({
+      el: '#container1'
+    })
+  </script>
+</html>

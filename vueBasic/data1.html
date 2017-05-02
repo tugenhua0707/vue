@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id="container1">
+      <component1></component1>
+      <component1></component1>
+      <component1></component1>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    var data = { counter: 0 };
+    // 全局注册
+    Vue.component('component1', {
+      template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+      // data是一个函数，vue不会报错，但是我们返回给每个组件的实列引用了同一个data对象
+      data: function() {
+        return data
+      }
+    });
+    new Vue({
+      el: '#container1'
+    })
+  </script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id="container1">
+      <input v-model='parentMsg' />
+      <br />
+      <!-- kebab-case in HTML-->
+      <child v-bind:my-message="parentMsg"></child>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#container1',
+      data: {
+        parentMsg: 'Message'
+      },
+      components: {
+        child: {
+          props: ['myMessage'],
+          template: '<span>{{myMessage}}</span>'
+        }
+      }
+    })
+  </script>
+</html>
