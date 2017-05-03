@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id='app'>
+      <parent-component></parent-component>
+    </div> 
+    <template id="child-component1">
+      <p>{{ msg }}</p>
+    </template>
+    <template id="child-component2">
+      <p>{{ msg }}</p>
+    </template>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    Vue.component('parent-component', {
+      template: '<div><child-component1></child-component1><child-component2></child-component2><button @click="showmsg">显示子组件的数据</button></div>', 
+      components: {
+        'child-component1': {
+          template: '#child-component1',
+          data: function() {
+            return {
+              msg: '这是子组件1'
+            }
+          }
+        },
+        'child-component2': {
+          template: '#child-component2',
+          data: function() {
+            return {
+              msg: '这是子组件2'
+            }
+          }
+        }
+      },
+      methods: {
+        showmsg: function() {
+          for (var i = 0; i < this.$children.length; i++) {
+            alert(this.$children[i].msg);
+          }
+        }
+      }
+    });
+    new Vue({
+      el: '#app'
+    })
+  </script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id='app'>
+      <parent-component></parent-component>
+    </div> 
+    <template id="child-component">
+      <div>
+        <p>111111</p>
+        <button @click="showmsg">显示父组件的实例</button>
+      </div>
+    </template>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    Vue.component('parent-component', {
+      template: '<div><child-component></child-component></div>', 
+      components: {
+        'child-component': {
+          template: '#child-component',
+          methods: {
+            showmsg: function() {
+              alert(this.$parent.msg);
+            }
+          }
+        }
+      },
+      data: function() {
+        return {
+          msg: 'parent component msg'
+        }
+      }
+    });
+    new Vue({
+      el: '#app'
+    })
+  </script>
+</html>
