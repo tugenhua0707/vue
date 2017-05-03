@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id='app'>
+      <button v-on:click="warn('warn message', $event)">submit</button>
+    </div> 
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    var example1 = new Vue({
+      el: '#app',
+      methods: {
+        warn: function(message, event) {
+          console.log(event); // 打开控制台查看 打印出原生事件的所有信息
+          alert(message);
+        }
+      }
+    });
+  </script>
+</html>

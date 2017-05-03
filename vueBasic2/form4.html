@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id='app'>
+      <input type="checkbox" value="Jack" v-model="checkedNames">
+      <label>Jack</label>
+      <input type="checkbox" value="John" v-model="checkedNames">
+      <label>John</label>
+      <input type="checkbox" value="Mike" v-model="checkedNames">
+      <label>Mike</label>
+      <br>
+      <span>Checked names: {{ checkedNames }}</span>
+    </div> 
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    var example1 = new Vue({
+      el: '#app',
+      data: {
+        checkedNames: []
+      }
+    });
+  </script>
+</html>

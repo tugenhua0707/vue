@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id='app'>
+      <select v-model="selected" multiple style="width: 50px">
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <br>
+      <span>Selected: {{ selected }}</span>
+    </div> 
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    var example1 = new Vue({
+      el: '#app',
+      data: {
+        selected: []
+      }
+    });
+  </script>
+</html>

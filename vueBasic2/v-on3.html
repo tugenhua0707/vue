@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id='app'>
+      <button v-on:click="say(1)">1</button>
+    </div> 
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    var example1 = new Vue({
+      el: '#app',
+      methods: {
+        say: function(message) {
+          alert(message);
+        }
+      }
+    });
+  </script>
+</html>

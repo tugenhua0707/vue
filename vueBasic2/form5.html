@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <title>演示Vue</title>
+    </head>
+    <div id='app'>
+      <input type="radio" value="One" v-model="picked">
+      <label>One</label>
+      <br>
+      <input type="radio" value="Two" v-model="picked">
+      <label>Two</label>
+      <br>
+      <span>Picked: {{ picked }}</span>
+    </div> 
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    var example1 = new Vue({
+      el: '#app',
+      data: {
+        picked: ''
+      }
+    });
+  </script>
+</html>
