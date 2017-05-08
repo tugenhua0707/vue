@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      .fade-enter-active {
+        transition: all .5s ease;
+      }
+      .fade-leave-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+      }
+      .fade-enter, .fade-leave-active {
+        transform: translateX(10px);
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='app'>
+      <button v-on:click="show = !show">toggle</button>
+      <transition name='fade'>
+        <p v-if="show">hello</p>
+      </transition>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        show: true
+      }
+    })
+  </script>
+</html>

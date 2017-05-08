@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      .wrap {
+        position: relative;
+        height: 18px;
+      }
+      .wrap button {
+        position: absolute;
+      }
+      .no-mode-fade-enter-active, .no-mode-fade-leave-active {
+        transition: all .5s
+      }
+      .no-mode-fade-enter, .no-mode-fade-leave-active {
+        opacity: 0;
+      }
+      .no-mode-fade-enter {
+        transform: translateX(31px);
+      }
+      .no-mode-fade-leave-active {
+        transform: translateX(-31px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id='app'>
+      <div class='wrap'>
+        <transition name='no-mode-fade' mode='in-out'>
+          <button v-if='on' key='on' @click='on=false'>on</button>
+          <button v-else='' key='off' @click='on=true'>off</button>
+        </transition>
+      </div>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        on: false
+      }
+    })
+  </script>
+</html>

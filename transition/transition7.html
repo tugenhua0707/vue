@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      .no-mode-fade-enter-active, .no-mode-fade-leave-active {
+        transition: opacity .5s
+      }
+      .no-mode-fade-enter, .no-mode-fade-leave-active {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='app'>
+      <transition name='no-mode-fade'>
+        <button v-if='on' key='on' @click='on=false'>on</button>
+        <button v-else='' key='off' @click='on=true'>off</button>
+      </transition>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        on: false
+      }
+    })
+  </script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      .component-fade-enter-active, .component-fade-leave-active {
+        transition: opacity .3s ease;
+      }
+      .component-fade-enter, .component-fade-leave-active {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='app'>
+      <input v-model='view' type='radio' value='v-a' name="view" />
+      <label for='a'>A</label>
+      <input v-model='view' type='radio' value='v-b' name='view' />
+      <label for='b'>B</label>
+      <transition name='component-fade' mode='out-in'>
+        <component v-bind:is='view'></component>
+      </transition>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        view: 'v-a'
+      },
+      components: {
+        'v-a': {
+          template: '<div>Component A</div>'
+        },
+        'v-b': {
+          template: '<div>Component B</div>'
+        }
+      }
+    })
+  </script>
+</html>
