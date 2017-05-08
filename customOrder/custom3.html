@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div id='demo' v-demo:hello.a.b='message'>
+      
+    </div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue/transition/vue.js"></script>
+  <script type="text/javascript">
+    Vue.directive('demo', {
+      bind: function(el, binding, vnode) {
+        var s = JSON.stringify;
+        el.innerHTML = 
+          'name: '       + s(binding.name) + '<br/>' + 
+          'value: '      + s(binding.value) + '<br/>' + 
+          'expression: ' + s(binding.expression) + '<br/>' + 
+          'argument: '   + s(binding.arg) + '<br/>' + 
+          'modifiers: '  + s(binding.modifiers) + '<br/>' + 
+          'vnode: '      + Object.keys(vnode).join(', ')
+      }
+    })
+    new Vue({
+      el: '#demo',
+      data: {
+        message: 'hello!'
+      }
+    })
+  </script>
+</html>

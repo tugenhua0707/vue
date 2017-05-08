@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div id='demo' v-demo="{ color: 'white', text: 'hello!' }">
+      
+    </div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue/transition/vue.js"></script>
+
+  <script type="text/javascript">
+    Vue.directive('demo', function (el, binding) {
+      console.log(binding.value.color) // => "white"
+      console.log(binding.value.text)  // => "hello!"
+    })
+    new Vue({
+      el: '#demo'
+    })
+  </script>
+</html>

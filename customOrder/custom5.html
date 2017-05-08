@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      img { width: 180px; height: 180px; overflow: hidden;}
+    </style>
+  </head>
+  <body>
+    <div id='demo'>
+      <img v-for='item in list' v-img='item.url'/>
+    </div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue/transition/vue.js"></script>
+
+  <script type="text/javascript">
+    Vue.directive('img', {
+      inserted: function(el, binding) {
+        console.log(el)
+        // 下面使用一张背景颜色来演示一下，
+        var color = Math.floor(Math.random()*1000000);
+        el.style.backgroundColor = '#' + color; // 随机的背景颜色
+
+        var img = new Image();
+        img.src = binding.value; 
+        img.onload = function() {
+          el.style.backgroundImage = 'url(' + binding.value + ')';
+        }
+      }
+    });
+    new Vue({
+      el: '#demo',
+      data: {
+        list: [
+          {
+            url: 'http://img.alicdn.com/imgextra/i3/730692984/TB2.dQMdxXkpuFjy0FiXXbUfFXa_!!730692984-0-beehive-scenes.jpg_180x180q70'
+          },
+          {
+            url: 'http://img.alicdn.com/imgextra/i2/730692984/TB239AJdw0kpuFjSspdXXX4YXXa_!!730692984-0-beehive-scenes.jpg_180x180q70'
+          },
+          {
+            url: 'http://img.alicdn.com/imgextra/i4/730692984/TB29TsZdrVkpuFjSspcXXbSMVXa_!!730692984-0-beehive-scenes.jpg_180x180q70'
+          }
+        ]
+      }
+    })
+  </script>
+</html>

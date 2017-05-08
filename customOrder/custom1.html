@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div id='demo'>
+      <input v-focus>
+    </div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue/transition/vue.js"></script>
+  <script type="text/javascript">
+
+    // 注册一个全局定义指令 v-focus
+    Vue.directive('focus', {
+
+      // 绑定元素插入到DOM 中
+      inserted: function (el) {
+        // 聚焦元素
+        el.focus()
+      }
+    })
+    new Vue({
+      el: '#demo'
+    })
+  </script>
+</html>
