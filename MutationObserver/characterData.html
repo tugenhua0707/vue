@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div id='demo'>
+      <ol>
+        <li>111111</li>
+      </ol>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+     var list = document.querySelector('ol');
+
+     var Observer = new MutationObserver(function(mutations, instance){
+        mutations.forEach(function(mutation){
+          console.log(mutation);
+        });
+     });
+    Observer.observe(list, {
+      childList:true,
+      characterData:true,
+      subtree:true
+    });   
+    list.childNodes[0].data = "cha";
+  </script>
+</html>

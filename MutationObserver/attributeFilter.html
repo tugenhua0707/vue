@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div id='demo'>
+      <ol>
+        <li>111111</li>
+      </ol>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+     var list = document.querySelector('ol');
+
+     var Observer = new MutationObserver(function(mutations, instance){
+        mutations.forEach(function(mutation){
+          console.log(mutation);
+        });
+     });
+    Observer.observe(list, {
+      attributes: true,
+      attributeFilter: ['data-value']
+    });   
+    // 第一次设置属性 data-key 不会触发的，因为data-value 不存在
+    list.setAttribute('data-key', 1);
+
+    // 第二次会触发
+    list.setAttribute('data-value', 1);
+  </script>
+</html>

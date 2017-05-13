@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div id='demo'>
+      <ol contenteditable oninput="" style='border: 1px solid red'>
+        <li>111111</li>
+      </ol>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+     var list = document.querySelector('ol');
+
+     var Observer = new MutationObserver(function(mutations, instance){
+        mutations.forEach(function(mutation){
+          console.log(mutation);
+          if(mutation.type === 'childList') {
+            var list_values = [].slice.call(list.children).map(function(node) {
+              return node.innerHTML;
+            }).filter(function(s) {
+              if(s === '<br>') {
+                return false;
+              } else {
+                return true;
+              }
+            });
+            console.log(list_values);
+          }
+        });
+     });
+    Observer.observe(list, {
+      childList: true
+    });   
+    
+  </script>
+</html>

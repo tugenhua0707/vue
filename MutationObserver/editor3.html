@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div id='editor' contenteditable style="width: 240px; height: 80px; border: 1px solid red;"></div>
+    <p id="textInput">还可以输入100字</p>
+  </body>
+
+  <script type="text/javascript">
+     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+     var editor = document.querySelector('#editor');
+     var textInput = document.querySelector('#textInput');
+     var observer = new MutationObserver(function(mutations){
+        mutations.forEach(function(mutation) {
+          if(mutation.type === 'characterData') {
+            var newValue = mutation.target.textContent;
+            textInput.innerHTML = "还可以输入" +  (1000 - newValue.length+"字");
+          }
+        });
+     });
+    observer.observe(editor, {
+      childList: true,
+      attributes: true,
+      characterData: true,
+      subtree: true,
+      characterDataOldValue: true,
+    });   
+    
+  </script>
+</html>
