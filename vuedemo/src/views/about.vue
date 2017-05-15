@@ -16,7 +16,6 @@
     </div>
   </div>
 </template>
-
 <script>
   var myComponent = {
     template: '<div>A custom component!</div>'
