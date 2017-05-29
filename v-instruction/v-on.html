@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      img { width: 180px; height: 180px; overflow: hidden;}
+    </style>
+  </head>
+  <body>
+    <div id='demo'>
+      <div v-for='(item, index) in msg' :key='item.id' @click='dothis'>
+        {{ item }}
+      </div>
+    </div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue/transition/vue.js"></script>
+
+  <script type="text/javascript">
+    new Vue({
+      el: '#demo',
+      data: {
+        msg: [1, 2, 3]
+      },
+      methods: {
+        dothis: function() {
+          alert(1)
+        }
+      }
+    })
+  </script>
+</html>
