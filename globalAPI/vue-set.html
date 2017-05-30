@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      img { width: 180px; height: 180px; overflow: hidden;}
+    </style>
+  </head>
+  <body>
+    <div id='demo'> 
+      {{ msg.age }}
+    </div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue/transition/vue.js"></script>
+
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#demo',
+      data: {
+        msg: {
+          age: 10
+        }
+      }
+    });
+    Vue.set(app.msg, 'name', 'longen');
+    console.log(app.msg);  // 打印出对象，有刚刚设置的属性name {}
+  </script>
+</html>

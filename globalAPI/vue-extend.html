@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      img { width: 180px; height: 180px; overflow: hidden;}
+    </style>
+  </head>
+  <body>
+    <div id='demo'></div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue/transition/vue.js"></script>
+
+  <script type="text/javascript">
+    // 创建构造器
+    var P = Vue.extend({
+      template: '<p>{{msg}}</p>',
+      data: function() {
+        return {
+          msg: 'aa'
+        }
+      }
+    });
+    // 创建实例
+    new P().$mount('#demo');
+  </script>
+</html>

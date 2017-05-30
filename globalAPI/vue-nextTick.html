@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      img { width: 180px; height: 180px; overflow: hidden;}
+    </style>
+  </head>
+  <body>
+    <div id='demo'>{{ msg }}</div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue/transition/vue.js"></script>
+
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#demo',
+      data: {
+        msg: '123'
+      }
+    });
+    // 更改数据
+    vm.msg = 'new message';
+    console.log(vm.$el.textContent); // 123
+    Vue.nextTick(function() {
+      console.log(vm.$el.textContent); // new message
+    });
+  </script>
+</html>
