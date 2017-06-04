@@ -14,6 +14,8 @@
         <router-link class='nav-item' to='/checkboxGroup'>复选框多选</router-link>
         <router-link class='nav-item' to='/checkboxGroup2'>复选框禁用</router-link>
         <router-link class='nav-item' to='/checkboxGroup3'>复选框全选</router-link>
+
+        <router-link class='nav-item' to='/clickoutside'>自定义指令</router-link>
       </div>
     </div>
     <div>
