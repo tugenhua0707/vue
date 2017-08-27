@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      * {margin: 0; padding: 0;}
+      ul, li {list-style: none;}
+      #app {width: 800px; margin: 20px auto; border:1px solid #ccc; border-bottom: none;}
+      #app li {height: 32px; line-height: 32px; border-bottom: 1px solid #ccc;}
+      #app li.bgColor {background-color: red;}
+    </style>
+  </head>
+  <body>
+    <div id='app'>
+      <ul>
+        <li 
+          v-for="(item, index) in items" 
+          @mouseenter.stop="handleMouseIn(index)"
+          @mouseleave.stop="handleMouseOut(index)"
+          :class="rowClasses(index)"
+        >
+          <span>{{item.name}}</span>
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        items: [
+          {name: 'kongzhi'},
+          {name: 'longen'},
+          {name: 'tugenhua'}
+        ]
+      },
+      computed: {
+        
+      },
+      methods: {
+        rowClasses (index) {
+          return [
+            {
+              [`bgColor`]: this.$data.items[index] && this.$data.items[index]._isHover
+            }
+          ]
+        },
+        handleMouseIn(index) {
+          if (this.$data.items[index]._isHover) {
+            return;
+          }
+          console.log(111); // 可以执行到
+          this.$data.items[index]._isHover = true;
+          this.$data.items = Object.assign({}, this.$data.items);
+        },
+        handleMouseOut(index) {
+          this.$data.items[index]._isHover = false;
+          this.$data.items = Object.assign({}, this.$data.items);
+        }
+      }
+    });
+  </script>
+</html>
