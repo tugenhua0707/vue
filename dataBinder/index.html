@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+ <html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <title>标题</title>
+        <link rel="shortcut icon" href="/favicon.ico">
+    </head>
+    <body>
+      <input type="text" id="inputId" data-bind-objId="name" style="border: 1px solid #ccc; width:200px; height: 24px; "/>
+      <div id="modelView" style="border: 1px solid red; width: 200px; height: 24px; margin-top:20px; margin-bottom:20px;"></div>
+      <button id="btn">model的变化导致view的变化</button>
+
+      <script>
+
+        function DataBinder(objId, changeId) {
+          // 发布订阅原型
+          var pubSub = {
+            allCallbacks: [],
+            // 增加订阅者
+            on: function(eventName, callback) {
+              // 如果没有订阅过该消息，给这个消息创建一个缓存列表
+              if(!this.allCallbacks[eventName]) {
+                this.allCallbacks[eventName] = [];
+              }
+              this.allCallbacks[eventName].push(callback);
+            },
+            // 发布消息
+            public: function() {
+              
+              var eventName = Array.prototype.shift.call(arguments);
+              // 取出该消息对应的回调函数集合
+              var callbacks = this.allCallbacks[eventName];
+              if (!callbacks || callbacks.length === 0) {
+                return false;
+              }
+              for (var i = 0; i < callbacks.length; i++) {
+                var callback = callbacks[i];
+                callback.apply(this, arguments);
+              }
+            }
+          };
+          var dataAttr = "data-bind-" + objId;
+          var message = objId + ":change";
+
+          var changeHandler = function(e) {
+            var target = e.target || e.srcElement;
+            var attrName = target.getAttribute(dataAttr);
+            if (attrName && attrName !== "") {
+              // 发布消息
+              pubSub.public(message, attrName, target.value);
+            }
+          };
+          // 监听视图层的事件变化
+          if (document.addEventListener) {
+            document.addEventListener('input', changeHandler, false);
+          } else {
+            document.attachEvent("oninput", changeHandler);
+          }
+
+          // 监听模型上的变化，并把变化传播到所有绑定的元素上
+          pubSub.on(message, function(attrName, newVal) {
+            var elements = document.querySelectorAll("[" + dataAttr + "=" + attrName + "]");
+            var tagName;
+            for (var i = 0, ilen = elements.length; i < ilen; i++) {
+              tagName = elements[i].tagName.toLowerCase();
+              if (tagName === 'input' || tagName === 'textarea' || tagName === 'select') {
+                elements[i].value = newVal;
+                changeId.innerHTML = newVal;
+              } else {
+                elements[i].innerHTML = newVal;
+                changeId.innerHTML = newVal;
+              }
+            }
+          });
+          return pubSub;
+        }
+
+        // 定义一个User模型
+        function User(uid, changeId) {
+          var binder = new DataBinder(uid, changeId);
+          var user = {
+            attrs: {},
+            set: function(key, value){
+              this.attrs[key] = value;
+              // model变化通知更新view
+              binder.public(uid + ":change", key, value);
+            },
+            get: function(key) {
+              return this.attrs[key];
+            }
+          };
+          /*
+          // 视图变化更新model
+          binder.on(uid + ":change", function(key, newVal) {
+            user.set(key, newVal);
+          });
+          */
+          return user;
+        }
+
+        // 绑定model到view
+        var modelView = document.getElementById("modelView");
+        var inputId = document.getElementById("inputId");
+
+        // 测试demo
+        var user = new User("objId", modelView);
+        user.set("name", 1);
+
+        modelView.innerHTML = user.get("name");
+
+        // 测试模型的变化到 视图层的变化 
+        var btn = document.getElementById("btn");
+        btn.onclick = function() {
+          var value = inputId.value;
+          user.set("name", parseInt(value) + 1);
+          modelView.innerHTML = user.get("name");
+        };
+      </script>
+    </body>
+</html>
