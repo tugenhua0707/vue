@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+ <html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <title>标题</title>
+        <link rel="shortcut icon" href="/favicon.ico">
+    </head>
+    <body>
+      <script>
+        function observerFunc(data) {
+          if (!data || typeof data !== 'object') {
+            return;
+          }
+          // 遍历对象的属性
+          Object.keys(data).forEach(function(key) {
+            // 调用函数
+            definedAttr(data, key, data[key]);
+          });
+        };
+        function definedAttr(data, key, val){
+          // 递归调用函数 监听所有的子属性
+          observerFunc(val);
+          Object.defineProperty(data, key, {
+            enumerable: true,  // 可枚举
+            get: function() {
+              return val;
+            },
+            set: function(newVal) {
+              var str = "监听到值发生改变了,从旧值"+val+"到新值"+newVal
+              alert(str);
+              val = newVal;
+            }
+          });
+        }
+        var data = {"name": "kongzhi"};
+        // 调用函数 
+        observerFunc(data);
+        // 改变属性
+        data.name = "longen"; 
+      </script>
+    </body>
+</html>
