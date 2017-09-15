@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <tb-heading :level="2">
+        Hello world!
+      </tb-heading>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+
+  <script>
+    Vue.component('tb-heading', {
+      render: function(createElement) {
+        var pElem = createElement('p', 'hello world');
+        return createElement('div', [
+          pElem, pElem
+        ])
+      },
+      props: {
+        level: {
+          type: Number,
+          required: true
+        }
+      }
+    });
+    new Vue({
+      el: '#container'
+    });
+  </script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <tb-heading>
+        Hello world!
+      </tb-heading>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+
+  <script>
+    Vue.component('tb-heading', {
+      render: function(createElement) {
+        console.log(this)
+        if (this.items.length) {
+          return createElement('ul', this.items.map(function(item){
+            return createElement('li', item.name);
+          }))
+        } else {
+          return createElement('p', 'No items found.');
+        }
+      },
+      
+      props: {
+        items: {
+          type: Array,
+          default: function() {
+            return [
+              {
+                name: 'kongzhi1'
+              },
+              {
+                name: 'kongzhi2'
+              }
+            ]
+          }
+        }
+      }
+    });
+    new Vue({
+      el: '#container'
+    });
+  </script>
+</html>

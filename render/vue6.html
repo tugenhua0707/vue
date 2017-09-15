@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <tb-heading @input="inputFunc">
+        Hello world!
+      </tb-heading>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+
+  <script>
+    Vue.component('tb-heading', {
+      render: function(createElement) {
+        var self = this;
+        return createElement('input', {
+          domProps: {
+            value: '11'
+          },
+          on: {
+            input: function(event) {
+              self.value = event.target.value;
+              self.$emit('input', self.value);
+            }
+          }
+        })
+      },
+      props: {
+        
+      }
+    });
+    new Vue({
+      el: '#container',
+      methods: {
+        inputFunc: function(value) {
+          console.log(value)
+        }
+      }
+    });
+  </script>
+</html>

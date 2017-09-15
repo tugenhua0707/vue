@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <tb-heading :level="2">
+        Hello world!
+      </tb-heading>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+
+  <script>
+    var getChildrenTextContent = function(children) {
+      return children.map(function(node) {
+        return node.children ? getChildrenTextContent(node.children) : node.text
+      }).join('')
+    };
+    Vue.component('tb-heading', {
+      render: function(createElement) {
+        var headingId = getChildrenTextContent(this.$slots.default)
+          .toLowerCase()
+          .replace(/\W+/g, '-')
+          .replace(/(^\-|\-$)/g, '')
+        return createElement(
+          'h' + this.level,
+          [
+            createElement('a', {
+              attrs: {
+                name: headingId,
+                href: '#' + headingId
+              },
+              style: {
+                color: 'red',
+                fontSize: '20px'
+              },
+              'class': {
+                foo: true,
+                bar: false
+              },
+              // DOM属性
+              domProps: {
+                innerHTML: 'baz'
+              },
+              // 组件props
+              props: {
+                myProp: 'bar'
+              },
+              // 事件监听基于 'on'
+              // 所以不再支持如 'v-on:keyup.enter' 修饰语
+              // 需要手动匹配 KeyCode  
+              on: {
+                click: function(event) {
+                  event.preventDefault();
+                  console.log(111);
+                }
+              }
+            }, this.$slots.default)
+          ]
+        )
+      },
+      props: {
+        level: {
+          type: Number,
+          required: true
+        }
+      }
+    });
+    new Vue({
+      el: '#container'
+    });
+  </script>
+</html>

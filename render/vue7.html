@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+
+    <div id="container">
+      {{msg}}
+      <choice>
+        <item value="1">test</item>
+      </choice>
+    </div>
+
+  </body>
+  <script src="./vue.js"></script>
+
+  <script>
+    Vue.component('choice', {
+      template: '<div><ul><slot></slot></ul></div>'
+    });
+
+    Vue.component('item', {
+      functional: true,
+      render: function(h, context) {
+        return h('li', {
+          on: {
+            click: function() {
+              console.log(context);
+              console.log(context.parent);
+              console.log(context.props)
+            }
+          }
+        }, context.children)
+      },
+      props: ['value']
+    })
+
+    new Vue({
+      el: '#container',
+      data: {
+        msg: 'hello'
+      }
+    });
+  </script>
+</html>
