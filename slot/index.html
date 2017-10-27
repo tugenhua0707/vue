@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue-scope的理解</title>
+    <script src="./libs/vue.js"></script>
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="./js/scope.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <tb-list :data="data">
+        <template scope="scope">
+          <div class="info" :s="JSON.stringify(scope)">
+            <p>姓名:{{scope.row.name}}</p>
+            <p>年龄: {{scope.row.age}}</p>
+            <p>性别: {{scope.row.sex}}</p>
+            <p>索引：{{scope.$index}}</p>
+          </div>
+        </template>
+      </tb-list>
+    </div>
+    <script id="tb-list" type="text/x-template">
+      <ul>
+        <li v-for="(item, index) in data">
+          <slot :row="item" :$index="index"></slot>
+        </li>
+      </ul>
+    </script>
+    <script type="text/javascript">
+      new Vue({
+        el: '#app',
+        data() {
+          return {
+            data: [
+              {
+                name: 'kongzhi1',
+                age: '29',
+                sex: 'man'
+              }, 
+              {
+                name: 'kongzhi2',
+                age: '30',
+                sex: 'woman'
+              }
+            ]
+          }
+        },
+        methods: {
+          
+        }
+      });
+    </script>
+  </body>
+</html>
