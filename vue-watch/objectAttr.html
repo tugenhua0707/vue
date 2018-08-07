@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      ul,li {list-style: none;}
+      .list {float: left; width:200px;}
+      button {float:left; margin-top:18px;}
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div style="width:100%;overflow:hidden;">
+        <input type="text" v-model="tform.count" />
+      </div>
+    </div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue-upload-image/libs/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        tform: {
+          count: 1
+        }
+      },
+      watch: {
+        tform: {
+          handler(newValue, oldValue) {
+            // newValue 和 oldValue 是一样的
+            console.log(newValue); 
+            console.log(oldValue);
+          },
+          // 深度监听 监听对象，数组的变化
+          deep: true
+        }
+      }
+    })
+  </script>
+</html>

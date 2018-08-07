@@ -1,0 +1,11 @@
+/node_modules/**
+/dist/**
+/npm-debug.log
+.DS_Store
+*.sample
+Thumbs.db
+npm-debug.log
+log/
+1.png
+index.md
+vue.js

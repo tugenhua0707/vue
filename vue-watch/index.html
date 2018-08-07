@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      ul,li {list-style: none;}
+      .list {float: left; width:200px;}
+      button {float:left; margin-top:18px;}
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div style="width:100%;overflow:hidden;">
+        <ul class="list">
+          <li v-for="(item, index) in arrs">
+            <label>第{{index+1}}项</label>
+            <input type="text" v-model="item.customItem" />
+          </li>
+        </ul>
+        <button @click="newadd">新增一项</button>
+      </div>
+      <div style="width:100%;margin-left:40px;overflow:hidden;">
+        <button @click="comfirm">提交</button>
+      </div>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        count: 1,
+        arrs: [{'value': 1, 'customItem': ''}]
+      },
+      methods: {
+        newadd() {
+          this.count++;
+          this.arrs.push({'customItem': '', 'value': this.count});
+        },
+        comfirm() {
+          for (let i = 0; i < this.arrs.length; i++) {
+            var item = this.arrs[i];
+            if (!item.customItem) {
+              alert('第'+(i+1)+'项不能为空');
+              return;
+            }
+          }
+        }
+      }
+    })
+  </script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      ul,li {list-style: none;}
+      .list {float: left; width:200px;}
+      button {float:left; margin-top:18px;}
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div style="width:100%;overflow:hidden;">
+        <ul class="list">
+          <li v-for="(item, index) in arrs">
+            <label>第{{index+1}}项</label>
+            <input type="number" v-model="item.customItem" @input="changeFunc(item, index)"/>
+          </li>
+        </ul>
+        <button @click="newadd">新增一项</button>
+      </div>
+    </div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue-upload-image/libs/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        count: 1,
+        arrs: [{'value': 1, 'customItem': ''}]
+      },
+      methods: {
+        newadd() {
+          this.count++;
+          this.arrs.push({'customItem': '', 'value': this.count});
+        },
+        changeFunc(item, index) {
+          this.arrs[index].customItem = item.customItem;
+          this.watchVal();
+        },
+        // 监听值的变化
+        watchVal() {
+          const arrs = this.arrs;
+          if (arrs.length > 0) {
+            for (let i = 0; i < arrs.length; i++) {
+              let customItem = arrs[i].customItem;
+              if (customItem * 1 < 0) {
+                this.$set(this.arrs[i], 'customItem', 0);
+              }
+            }
+          }
+        }
+      }
+    })
+  </script>
+</html>

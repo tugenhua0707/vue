@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      ul,li {list-style: none;}
+      .list {float: left; width:200px;}
+      button {float:left; margin-top:18px;}
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div style="width:100%;overflow:hidden;">
+        <input type="text" v-model="count" />
+      </div>
+    </div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue-upload-image/libs/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        count: 1
+      },
+      watch: {
+        count(newValue, oldValue) {
+          console.log('新输入的值为：'+newValue); // 会输出新值
+          console.log('原来的值为:'+oldValue); // 会输出旧值
+        }
+      }
+    })
+  </script>
+</html>

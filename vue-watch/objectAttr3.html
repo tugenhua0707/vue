@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>演示Vue</title>
+    <style>
+      ul,li {list-style: none;}
+      .list {float: left; width:200px;}
+      button {float:left; margin-top:18px;}
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div style="width:100%;overflow:hidden;">
+        <input type="text" v-model="tform.count" />
+      </div>
+    </div>
+  </body>
+  <script src="https://tugenhua0707.github.io/vue-upload-image/libs/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        tform: {
+          count: ''
+        }
+      },
+      computed: {
+        newNum: function() {
+          return this.tform.count;
+        }
+      },
+      watch: {
+        newNum: {
+          handler(newVal, oldVal) {
+            console.log('新值:' +newVal);
+            console.log('原来的值:' +oldVal);
+          },
+          deep: true
+        }
+      }
+    })
+  </script>
+</html>
